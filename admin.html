@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tecateliê | Painel Admin</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --pink:   #ff007a;
+            --dark:   #0a0a0c;
+            --card:   #121216;
+            --border: #242432;
+            --text:   #ffffff;
+            --muted:  #8e8e9e;
+            --green:  #ccff00;
+            --red:    #ef4444;
+            --font:   'Inter', sans-serif;
+            --mono:   'Space Mono', monospace;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--dark);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ── LOGIN ─────────────────────────────── */
+        #loginScreen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+
+        .login-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem 1.5rem;
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+        }
+
+        .login-card img {
+            height: 42px;
+            margin-bottom: 1.5rem;
+            object-fit: contain;
+        }
+
+        .login-card h1 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: .1em;
+            color: var(--pink);
+            margin-bottom: 0.4rem;
+        }
+
+        .login-card p {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+        }
+
+        .login-card input {
+            width: 100%;
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+            transition: border-color .2s;
+        }
+
+        .login-card input:focus {
+            outline: none;
+            border-color: var(--pink);
+        }
+
+        .login-error {
+            color: var(--red);
+            font-size: 0.78rem;
+            margin-bottom: 0.75rem;
+            display: none;
+        }
+
+        /* ── DASHBOARD ─────────────────────────── */
+        #dashboard { display: none; }
+
+        header.admin-header {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            padding: 0 1.25rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .admin-header .logo-area {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .admin-header .logo-area img {
+            height: 30px;
+            object-fit: contain;
+        }
+
+        .admin-header .logo-area span {
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: .15em;
+            color: var(--pink);
+            text-transform: uppercase;
+        }
+
+        .admin-header .header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .admin-header a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: .08em;
+            transition: color .2s;
+        }
+
+        .admin-header a:hover { color: var(--text); }
+
+        .admin-main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem 4rem;
+        }
+
+        .page-title {
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            font-weight: 900;
+            letter-spacing: .05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .page-title span { color: var(--pink); }
+
+        .page-subtitle {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.85rem 1rem;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            color: var(--muted);
+            text-transform: uppercase;
+        }
+
+        .stat-card .stat-value {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--pink);
+            line-height: 1.2;
+        }
+
+        /* ── BUTTONS ─────────────────────────────── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: .4rem;
+            padding: .6rem 1rem;
+            border-radius: 8px;
+            font-family: var(--font);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            cursor: pointer;
+            transition: opacity .2s, transform .1s;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn:hover { opacity: .85; }
+        .btn:active { transform: scale(.97); }
+
+        .btn-pink  { background: var(--pink); color: #fff; }
+        .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+        .btn-ghost:hover { border-color: var(--pink); color: var(--pink); }
+        .btn-danger { background: var(--red); color: #fff; }
+
+        /* ── FORM PANEL ──────────────────────────── */
+        .form-panel {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-panel h3 {
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 1rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.85rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: .35rem;
+        }
+
+        .form-group.full-width { grid-column: 1 / -1; }
+
+        .form-group label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: .6rem .8rem;
+            color: var(--text);
+            font-family: var(--font);
+            font-size: 0.85rem;
+            transition: border-color .2s;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--pink);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: .75rem;
+            margin-top: 1.25rem;
+        }
+
+        /* ── PRODUCTS TABLE ──────────────────────── */
+        .products-table-wrap {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            white-space: nowrap;
+        }
+
+        thead tr {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            padding: .75rem .85rem;
+            text-align: left;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: .65rem .85rem;
+            vertical-align: middle;
+        }
+
+        td img.product-thumb {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: .2rem .5rem;
+            border-radius: 20px;
+            font-size: 0.62rem;
+            font-weight: 700;
+        }
+
+        .status-badge.available { background: rgba(204,255,0,.15); color: var(--green); }
+        .status-badge.sold      { background: rgba(239,68,68,.15);  color: var(--red);   }
+
+        /* ── TOAST ───────────────────────────────── */
+        #toast {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: .75rem 1.25rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity .3s, transform .3s;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        #toast.show { opacity: 1; transform: translateY(0); }
+        #toast.success { border-color: var(--green); color: var(--green); }
+        #toast.error   { border-color: var(--red);   color: var(--red);   }
+    </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+    <div class="login-card">
+        <img src="logo-pink.png" alt="Tecateliê" onerror="this.src='https://via.placeholder.com/120x40/000000/ff007a?text=TECATELIÊ'">
+        <h1>PAINEL ADMIN</h1>
+        <p>Gerencie as peças da Tecateliê</p>
+        <input type="email"    id="loginEmail"    placeholder="E-mail" autocomplete="username">
+        <input type="password" id="loginPassword" placeholder="Senha"  autocomplete="current-password">
+        <p class="login-error" id="loginError">E-mail ou senha incorretos.</p>
+        <button class="btn btn-pink" style="width:100%;" onclick="doLogin()">ENTRAR</button>
+    </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+    <header class="admin-header">
+        <div class="logo-area">
+            <img src="logo-pink.png" alt="Tecateliê" onerror="this.src='https://via.placeholder.com/100x30/000000/ff007a?text=TECATELIÊ'">
+            <span>Admin</span>
+        </div>
+        <div class="header-right">
+            <a href="index.html" target="_blank">↗ Ver Site</a>
+            <button class="btn btn-ghost" onclick="doLogout()">SAIR</button>
+        </div>
+    </header>
+
+    <main class="admin-main">
+        <h1 class="page-title">GERENCIAR <span>PEÇAS</span></h1>
+        <p class="page-subtitle">Adicione, edite ou remova peças do site.</p>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-label">Total</div>
+                <div class="stat-value" id="statTotal">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Disponíveis</div>
+                <div class="stat-value" id="statAvailable">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Vendidas</div>
+                <div class="stat-value" id="statSold">—</div>
+            </div>
+        </div>
+
+        <div class="form-panel">
+            <h3 id="formTitle">➕ NOVA PEÇA</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Nome *</label>
+                    <input type="text" id="fTitle" placeholder="Ex: JAQUETA BOMBER Y2K">
+                </div>
+                <div class="form-group">
+                    <label>Categoria *</label>
+                    <select id="fCategory">
+                        <option value="">Selecione...</option>
+                        <option value="tops">Tops</option>
+                        <option value="bottoms">Bottoms</option>
+                        <option value="accessories">Acessórios</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Preço *</label>
+                    <input type="text" id="fPrice" placeholder="Ex: R$ 180,00">
+                </div>
+                <div class="form-group">
+                    <label>Tamanho *</label>
+                    <input type="text" id="fSize" placeholder="Ex: M, G, ÚNICO...">
+                </div>
+                <div class="form-group">
+                    <label>Condição</label>
+                    <input type="text" id="fCondition" placeholder="Ex: 10/10 (UPCYCLED)">
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="fStatus">
+                        <option value="available">Disponível</option>
+                        <option value="sold">Vendida</option>
+                    </select>
+                </div>
+                <div class="form-group full-width">
+                    <label>URLs das Fotos (uma por linha, máx. 3) *</label>
+                    <textarea id="fImages" rows="3" placeholder="Cole aqui os links das fotos (uma por linha)"></textarea>
+                </div>
+                <div class="form-group full-width">
+                    <label>Descrição</label>
+                    <textarea id="fDescription" rows="2" placeholder="Descrição da peça..."></textarea>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-ghost" onclick="clearForm()">LIMPAR</button>
+                <button class="btn btn-pink" id="saveBtn" onclick="saveProduct()">SALVAR PEÇA</button>
+            </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <h2 style="font-size:0.9rem; font-weight:800; text-transform:uppercase;">📦 Catálogo</h2>
+            <button class="btn btn-ghost" onclick="loadProducts()">↻ ATUALIZAR</button>
+        </div>
+
+        <div class="products-table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Nome</th>
+                        <th>Cat.</th>
+                        <th>Tam.</th>
+                        <th>Preço</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="productsTableBody">
+                    <tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--muted);">Carregando...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+<div id="toast"></div>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const SUPABASE_URL = 'https://lsxfmfijwoourcpwlxjf.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_nWn-gcZ5igGwPkTyjeus-Q_qpNz7-nF';
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let editingId = null;
+let allProducts = [];
+
+window.doLogin = doLogin;
+window.doLogout = doLogout;
+window.saveProduct = saveProduct;
+window.clearForm = clearForm;
+window.editProduct = editProduct;
+window.deleteProduct = deleteProduct;
+window.loadProducts = loadProducts;
+
+function showToast(msg, type = 'success') {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.className = `show ${type}`;
+    setTimeout(() => { el.className = ''; }, 3000);
+}
+
+async function doLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const errEl = document.getElementById('loginError');
+    errEl.style.display = 'none';
+
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+        errEl.style.display = 'block';
+        return;
+    }
+    showDashboard();
+}
+
+async function doLogout() {
+    await supabase.auth.signOut();
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('dashboard').style.display = 'none';
+}
+
+async function checkSession() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) showDashboard();
+}
+
+function showDashboard() {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadProducts();
+}
+
+async function loadProducts() {
+    const tbody = document.getElementById('productsTableBody');
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--muted);">Carregando...</td></tr>';
+
+    const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false });
+
+    if (error) {
+        tbody.innerHTML = `<tr><td colspan="7" style="color:var(--red); text-align:center;">Erro: ${error.message}</td></tr>`;
+        return;
+    }
+
+    allProducts = data || [];
+    updateStats();
+    renderTable();
+}
+
+function updateStats() {
+    const available = allProducts.filter(p => p.status === 'available').length;
+    const sold = allProducts.filter(p => p.status === 'sold').length;
+    document.getElementById('statTotal').textContent = allProducts.length;
+    document.getElementById('statAvailable').textContent = available;
+    document.getElementById('statSold').textContent = sold;
+}
+
+function renderTable() {
+    const tbody = document.getElementById('productsTableBody');
+    if (!allProducts.length) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--muted);">Nenhuma peça cadastrada.</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = allProducts.map(p => {
+        const thumb = (p.images && p.images[0]) || p.image || '';
+        const status = p.status === 'sold'
+            ? '<span class="status-badge sold">VENDIDA</span>'
+            : '<span class="status-badge available">DISPONÍVEL</span>';
+        const imgEl = thumb
+            ? `<img class="product-thumb" src="${thumb}" alt="${p.title}">`
+            : '<div style="width:40px;height:40px;background:var(--border);border-radius:6px;"></div>';
+
+        return `<tr>
+            <td>${imgEl}</td>
+            <td><strong>${p.title}</strong></td>
+            <td>${p.category}</td>
+            <td>${p.size || '—'}</td>
+            <td>${p.price || '—'}</td>
+            <td>${status}</td>
+            <td>
+                <button class="btn btn-ghost" onclick="editProduct(${p.id})">✏️</button>
+                <button class="btn btn-danger" onclick="deleteProduct(${p.id})">🗑</button>
+            </td>
+        </tr>`;
+    }).join('');
+}
+
+async function saveProduct() {
+    const title = document.getElementById('fTitle').value.trim();
+    const category = document.getElementById('fCategory').value;
+    const price = document.getElementById('fPrice').value.trim();
+    const size = document.getElementById('fSize').value.trim();
+    const condition = document.getElementById('fCondition').value.trim();
+    const status = document.getElementById('fStatus').value;
+    const description = document.getElementById('fDescription').value.trim();
+    const imagesRaw = document.getElementById('fImages').value.trim();
+    const images = imagesRaw.split('\n').map(s => s.trim()).filter(Boolean);
+
+    if (!title || !category || !price || !size) {
+        showToast('Preencha os campos obrigatórios (*).', 'error');
+        return;
+    }
+
+    const payload = { title, category, price, size, condition, status, description, images, image: images[0] || '' };
+
+    let error;
+    if (editingId) {
+        ({ error } = await supabase.from('products').update(payload).eq('id', editingId));
+    } else {
+        ({ error } = await supabase.from('products').insert([payload]));
+    }
+
+    if (error) {
+        showToast('Erro: ' + error.message, 'error');
+        return;
+    }
+
+    showToast(editingId ? '✅ Peça atualizada!' : '✅ Peça cadastrada!', 'success');
+    clearForm();
+    loadProducts();
+}
+
+function editProduct(id) {
+    const p = allProducts.find(x => x.id === id);
+    if (!p) return;
+    editingId = id;
+    document.getElementById('formTitle').textContent = '✏️ EDITAR PEÇA';
+    document.getElementById('fTitle').value = p.title || '';
+    document.getElementById('fCategory').value = p.category || '';
+    document.getElementById('fPrice').value = p.price || '';
+    document.getElementById('fSize').value = p.size || '';
+    document.getElementById('fCondition').value = p.condition || '';
+    document.getElementById('fStatus').value = p.status || 'available';
+    document.getElementById('fDescription').value = p.description || '';
+    document.getElementById('fImages').value = (p.images || []).join('\n');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function clearForm() {
+    editingId = null;
+    document.getElementById('formTitle').textContent = '➕ NOVA PEÇA';
+    ['fTitle','fCategory','fPrice','fSize','fCondition','fDescription','fImages'].forEach(id => {
+        document.getElementById(id).value = '';
+    });
+    document.getElementById('fStatus').value = 'available';
+}
+
+async function deleteProduct(id) {
+    if (!confirm('Deseja remover esta peça?')) return;
+    const { error } = await supabase.from('products').delete().eq('id', id);
+    if (error) {
+        showToast('Erro: ' + error.message, 'error');
+        return;
+    }
+    showToast('🗑 Peça removida.', 'success');
+    loadProducts();
+}
+
+checkSession();
+</script>
+
+</body>
+</html>
