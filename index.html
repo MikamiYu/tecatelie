@@ -2,37 +2,43 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Tecateliê | Y2K Upcycling & Streetwear</title>
     <meta name="description" content="Coleção e peças exclusivas Tecateliê Upcycling. Estilo Y2K e streetwear nacional.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
     <!-- Header Navigation Bar -->
     <nav class="nav-bar">
-        <div class="nav-brand">
-            <img src="logo-pink.png" alt="Tecateliê Logo" class="brand-logo-main" onerror="this.src='https://via.placeholder.com/150x45/000000/ff007a?text=TECATELIÊ'">
-        </div>
-        <div class="nav-links">
-            <a href="#catalog" class="nav-link">CATÁLOGO</a>
-            <a href="#about" class="nav-link">SOBRE</a>
-            <a href="https://instagram.com/tecatelierr" target="_blank" class="nav-link social-link">IG</a>
-            <a href="https://wa.me/5511999999999" target="_blank" class="nav-link social-link">WA</a>
+        <div class="nav-container">
+            <a href="#" class="brand-logo-link">
+                <img src="logo-pink.png" alt="Tecateliê Logo" class="brand-logo-main" onerror="this.onerror=null; this.src='logo-black.png';">
+            </a>
+            
+            <div class="nav-actions">
+                <a href="#catalog" class="nav-pill">CATÁLOGO</a>
+                <a href="#about" class="nav-pill">SOBRE</a>
+                <a href="https://instagram.com/tecatelierr" target="_blank" class="nav-icon-link" title="Instagram">IG</a>
+                <a href="https://wa.me/5511999999999" target="_blank" class="nav-icon-link highlight" title="WhatsApp">WA</a>
+            </div>
         </div>
     </nav>
 
     <!-- Giant Editorial Hero Banner -->
     <section class="hero-section">
-        <img src="hero-model.jpg" alt="Tecateliê Streetwear" class="hero-image" onerror="this.src='https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&auto=format&fit=crop&q=80'">
-        <div class="hero-overlay-content">
+        <div class="hero-image-container">
+            <img src="hero-model.jpg" alt="Tecateliê Streetwear" class="hero-image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&auto=format&fit=crop&q=80';">
+        </div>
+        
+        <div class="hero-floating-card">
             <h1 class="hero-giant-title">ÚLTIMO DROP</h1>
-            <div class="hero-subtitle-box">
-                <span class="hero-subtitle-text">NOVA COLEÇÃO • 100% UPCYCLING</span>
+            <div class="hero-badge-tag">
+                <span>NOVA COLEÇÃO • 100% UPCYCLING</span>
             </div>
         </div>
     </section>
@@ -123,7 +129,7 @@
     <!-- Methods / Editorial About Section -->
     <section class="methods-about-section" id="about">
         <div class="methods-photo-wrapper">
-            <img src="hero-model.jpg" alt="Editorial Tecateliê" onerror="this.src='https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format&fit=crop&q=80'">
+            <img src="hero-model.jpg" alt="Editorial Tecateliê" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format&fit=crop&q=80';">
         </div>
         <div class="methods-text-box">
             <h2>UPCYCLING & <span>BRECHÓ</span></h2>
@@ -140,11 +146,11 @@
                 <p>WHATSAPP: (11) 99999-9999</p>
             </div>
             <div class="footer-logo">
-                <img src="logo-pink.png" alt="Tecateliê Logo" onerror="this.src='https://via.placeholder.com/120x40/000000/ff007a?text=TECATELIÊ'">
+                <img src="logo-pink.png" alt="Tecateliê Logo" onerror="this.onerror=null; this.src='logo-black.png';">
             </div>
         </div>
     </footer>
 
-    <script type="module" src="app.js"></script>
+    <script type="module" src="app.js?v=3"></script>
 </body>
 </html>
