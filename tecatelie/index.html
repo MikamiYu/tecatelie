@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecateliê | Y2K Upcycling & Streetwear</title>
+    <meta name="description" content="Coleção e peças exclusivas Tecateliê Upcycling. Estilo Y2K e streetwear nacional.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&family=Space+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Navigation Bar -->
+    <nav class="nav-bar">
+        <div class="nav-links-left">
+            <a href="#catalog" class="nav-link">CATÁLOGO</a>
+            <a href="#about" class="nav-link">SOBRE</a>
+        </div>
+        <div class="brand-logo-container">
+            <img src="logo-pink.png" alt="Tecateliê" class="brand-logo-main">
+        </div>
+        <div class="nav-links-right">
+            <a href="https://instagram.com/tecatelierr" target="_blank" class="nav-link">INSTAGRAM</a>
+            <a href="https://wa.me/5511999999999" target="_blank" class="nav-link">WHATSAPP</a>
+        </div>
+    </nav>
+
+    <!-- Giant Editorial Hero Banner -->
+    <section class="hero-section">
+        <img src="hero-model.jpg" alt="Tecateliê Streetwear" class="hero-image">
+        <div class="hero-overlay-content">
+            <h1 class="hero-giant-title">ÚLTIMO DROP</h1>
+            <div class="hero-subtitle-box">
+                <span class="hero-subtitle-text">NOVA COLEÇÃO • 100% UPCYCLING</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Editorial Header Title -->
+    <div class="editorial-header" id="catalog">
+        <h2 class="editorial-title">PEÇAS <span>DISPONÍVEIS</span></h2>
+    </div>
+
+    <!-- Catalog Filter & Ticket Grid -->
+    <section class="catalog-section">
+        <div class="brutal-filters">
+            <button class="filter-btn active" data-filter="all">TODAS</button>
+            <button class="filter-btn" data-filter="tops">TOPS</button>
+            <button class="filter-btn" data-filter="bottoms">BOTTOMS</button>
+            <button class="filter-btn" data-filter="accessories">ACESSÓRIOS</button>
+        </div>
+
+        <div class="catalog-grid" id="catalogGrid">
+            <!-- Dynamically generated ticket items -->
+        </div>
+    </section>
+
+    <!-- Product Showcase Area (Reveals on selection) -->
+    <section class="showcase-section" id="featured" style="display: none;">
+        <div class="showcase-grid">
+            <!-- Visual Left Column -->
+            <div class="showcase-visual">
+                <img src="" alt="Peça Destaque" id="showcaseMainImg" class="showcase-main-img">
+                <div class="showcase-thumbs-bar">
+                    <div class="thumb-item active" onclick="changeShowcaseImage(0)">
+                        <img src="" id="thumbImg1" alt="V1">
+                    </div>
+                    <div class="thumb-item" onclick="changeShowcaseImage(1)">
+                        <img src="" id="thumbImg2" alt="V2">
+                    </div>
+                    <div class="thumb-item" onclick="changeShowcaseImage(2)">
+                        <img src="" id="thumbImg3" alt="V3">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Details Right Column -->
+            <div class="showcase-info">
+                <div>
+                    <span class="ticket-tag" id="showcaseCategory">TOPS</span>
+                    <h2 class="showcase-title" id="showcaseTitle">NOME DA PEÇA</h2>
+                    <div class="showcase-price-tag" id="showcasePrice">R$ 00,00</div>
+
+                    <div class="showcase-specs-list">
+                        <div class="spec-item">
+                            <label>TAMANHO</label>
+                            <span id="showcaseSize">G</span>
+                        </div>
+                        <div class="spec-item">
+                            <label>CONDIÇÃO</label>
+                            <span id="showcaseCondition">10/10</span>
+                        </div>
+                    </div>
+
+                    <div class="showcase-tabs-nav">
+                        <button class="tab-btn active" onclick="switchTab('desc')">DESCRIÇÃO</button>
+                        <button class="tab-btn" onclick="switchTab('comp')">COMPOSIÇÃO</button>
+                        <button class="tab-btn" onclick="switchTab('ship')">COMO COMPRAR</button>
+                    </div>
+
+                    <div class="tab-body" id="tabContent">
+                        Carregando detalhes...
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="#" target="_blank" class="btn-primary" id="waOrderBtn">
+                        GARANTIR PEÇA VIA WHATSAPP ⚡
+                    </a>
+                    <a href="#" target="_blank" class="btn-secondary" id="igOrderBtn">
+                        FALAR NO INSTAGRAM DM
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methods / Editorial About Section -->
+    <section class="methods-about-section" id="about">
+        <div class="methods-photo-wrapper">
+            <img src="hero-model.jpg" alt="Editorial Tecateliê">
+        </div>
+        <div class="methods-text-box">
+            <h2>UPCYCLING & <span>BRECHÓ</span></h2>
+            <p>O Tecateliê é uma marca de upcycling e brechó sem rótulos. Não nos prendemos a um único estilo: transitamos livremente por diversas vertentes e tendências da moda.</p>
+            <p>Nossa proposta é entregar uma estética autêntica e verdadeiramente exclusiva através de peças únicas, garimpadas e ressignificadas com personalidade.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-info">
+                <p>INSTAGRAM: @tecatelierr</p>
+                <p>WHATSAPP: (11) 99999-9999</p>
+            </div>
+            <div class="footer-logo">
+                <img src="logo-black.png" alt="Tecateliê Logo">
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
