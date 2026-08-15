@@ -2,59 +2,65 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Tecateliê | Y2K Upcycling & Streetwear</title>
     <meta name="description" content="Coleção e peças exclusivas Tecateliê Upcycling. Estilo Y2K e streetwear nacional.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=3">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&family=Space+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- Header Navigation Bar -->
     <nav class="nav-bar">
-        <div class="nav-container">
-            <a href="#" class="brand-logo-link">
-                <img src="logo-pink.png" alt="Tecateliê Logo" class="brand-logo-main" onerror="this.onerror=null; this.src='logo-black.png';">
+        <div class="nav-links-left">
+            <a href="#catalog" class="nav-link">CATÁLOGO</a>
+        </div>
+        <div class="brand-logo-container">
+            <img src="logo-black.png" alt="Tecateliê" class="brand-logo-main">
+        </div>
+        <div class="nav-links-right">
+            <a href="https://instagram.com/tecatelierr" target="_blank" class="nav-link nav-icon-link" title="Instagram">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
             </a>
-            
-            <div class="nav-actions">
-                <a href="#catalog" class="nav-pill">CATÁLOGO</a>
-                <a href="#about" class="nav-pill">SOBRE</a>
-                <a href="https://instagram.com/tecatelierr" target="_blank" class="nav-icon-link" title="Instagram">IG</a>
-                <a href="https://wa.me/5511999999999" target="_blank" class="nav-icon-link highlight" title="WhatsApp">WA</a>
-            </div>
         </div>
     </nav>
 
     <!-- Giant Editorial Hero Banner -->
     <section class="hero-section">
-        <div class="hero-image-container">
-            <img src="hero-model.jpg" alt="Tecateliê Streetwear" class="hero-image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&auto=format&fit=crop&q=80';">
-        </div>
-        
-        <div class="hero-floating-card">
+        <img src="hero-model.jpg" alt="Tecateliê Streetwear" class="hero-image">
+        <div class="hero-overlay-content">
             <h1 class="hero-giant-title">ÚLTIMO DROP</h1>
-            <div class="hero-badge-tag">
-                <span>NOVA COLEÇÃO • 100% UPCYCLING</span>
-            </div>
         </div>
     </section>
 
     <!-- Editorial Header Title -->
     <div class="editorial-header" id="catalog">
-        <h2 class="editorial-title">PEÇAS <span>DISPONÍVEIS</span></h2>
+        <h2 class="editorial-title"><span>PEÇAS DISPONÍVEIS</span></h2>
     </div>
 
     <!-- Catalog Filter & Ticket Grid -->
     <section class="catalog-section">
-        <div class="brutal-filters">
-            <button class="filter-btn active" data-filter="all">TODAS</button>
-            <button class="filter-btn" data-filter="tops">TOPS</button>
-            <button class="filter-btn" data-filter="bottoms">BOTTOMS</button>
-            <button class="filter-btn" data-filter="accessories">ACESSÓRIOS</button>
+        <div class="filter-dropdown-wrapper">
+            <button class="filter-toggle-btn" id="filterToggle">
+                <span id="filterLabel">FILTRAR POR CATEGORIA</span>
+                <span class="filter-arrow" id="filterArrow">▼</span>
+            </button>
+            <ul class="filter-list" id="filterList">
+                <li class="filter-item active" data-filter="all">TODAS AS PEÇAS</li>
+                <li class="filter-item" data-filter="blusas">BLUSAS</li>
+                <li class="filter-item" data-filter="jaquetas">JAQUETAS</li>
+                <li class="filter-item" data-filter="calcas">CALÇAS</li>
+                <li class="filter-item" data-filter="shorts">SHORTS</li>
+                <li class="filter-item" data-filter="sapatos">SAPATOS</li>
+                <li class="filter-item" data-filter="acessorios">ACESSÓRIOS</li>
+            </ul>
         </div>
 
         <div class="catalog-grid" id="catalogGrid">
@@ -64,63 +70,56 @@
 
     <!-- Product Showcase Area (Reveals on selection) -->
     <section class="showcase-section" id="featured" style="display: none;">
-        <div class="showcase-card-container">
-            <button class="showcase-close-btn" onclick="closeShowcase()" aria-label="Fechar">✕</button>
-            
-            <div class="showcase-grid">
-                <!-- Visual Left Column -->
-                <div class="showcase-visual">
-                    <img src="" alt="Peça Destaque" id="showcaseMainImg" class="showcase-main-img">
-                    <div class="showcase-thumbs-bar">
-                        <div class="thumb-item active" onclick="changeShowcaseImage(0)">
-                            <img src="" id="thumbImg1" alt="V1">
+        <div class="showcase-grid">
+            <!-- Visual Left Column -->
+            <div class="showcase-visual">
+                <img src="" alt="Peça Destaque" id="showcaseMainImg" class="showcase-main-img">
+                <div class="showcase-thumbs-bar">
+                    <div class="thumb-item active" onclick="changeShowcaseImage(0)">
+                        <img src="" id="thumbImg1" alt="V1">
+                    </div>
+                    <div class="thumb-item" onclick="changeShowcaseImage(1)">
+                        <img src="" id="thumbImg2" alt="V2">
+                    </div>
+                    <div class="thumb-item" onclick="changeShowcaseImage(2)">
+                        <img src="" id="thumbImg3" alt="V3">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Details Right Column -->
+            <div class="showcase-info">
+                <div>
+                    <span class="ticket-tag" id="showcaseCategory">TOPS</span>
+                    <h2 class="showcase-title" id="showcaseTitle">NOME DA PEÇA</h2>
+                    <div class="showcase-price-tag" id="showcasePrice">R$ 00,00</div>
+
+                    <div class="showcase-specs-list">
+                        <div class="spec-item">
+                            <label>TAMANHO</label>
+                            <span id="showcaseSize">G</span>
                         </div>
-                        <div class="thumb-item" onclick="changeShowcaseImage(1)">
-                            <img src="" id="thumbImg2" alt="V2">
+                        <div class="spec-item">
+                            <label>CONDIÇÃO</label>
+                            <span id="showcaseCondition">10/10</span>
                         </div>
-                        <div class="thumb-item" onclick="changeShowcaseImage(2)">
-                            <img src="" id="thumbImg3" alt="V3">
-                        </div>
+                    </div>
+
+                    <div class="showcase-tabs-nav">
+                        <button class="tab-btn active" onclick="switchTab('desc')">DESCRIÇÃO</button>
+                        <button class="tab-btn" onclick="switchTab('comp')">COMPOSIÇÃO</button>
+                        <button class="tab-btn" onclick="switchTab('ship')">COMO COMPRAR</button>
+                    </div>
+
+                    <div class="tab-body" id="tabContent">
+                        Carregando detalhes...
                     </div>
                 </div>
 
-                <!-- Details Right Column -->
-                <div class="showcase-info">
-                    <div>
-                        <span class="ticket-tag" id="showcaseCategory">TOPS</span>
-                        <h2 class="showcase-title" id="showcaseTitle">NOME DA PEÇA</h2>
-                        <div class="showcase-price-tag" id="showcasePrice">R$ 00,00</div>
-
-                        <div class="showcase-specs-list">
-                            <div class="spec-item">
-                                <label>TAMANHO</label>
-                                <span id="showcaseSize">G</span>
-                            </div>
-                            <div class="spec-item">
-                                <label>CONDIÇÃO</label>
-                                <span id="showcaseCondition">10/10</span>
-                            </div>
-                        </div>
-
-                        <div class="showcase-tabs-nav">
-                            <button class="tab-btn active" onclick="switchTab('desc')">DESCRIÇÃO</button>
-                            <button class="tab-btn" onclick="switchTab('comp')">COMPOSIÇÃO</button>
-                            <button class="tab-btn" onclick="switchTab('ship')">COMO COMPRAR</button>
-                        </div>
-
-                        <div class="tab-body" id="tabContent">
-                            Carregando detalhes...
-                        </div>
-                    </div>
-
-                    <div class="cta-buttons">
-                        <a href="#" target="_blank" class="btn-primary" id="waOrderBtn">
-                            GARANTIR PEÇA VIA WHATSAPP ⚡
-                        </a>
-                        <a href="#" target="_blank" class="btn-secondary" id="igOrderBtn">
-                            FALAR NO INSTAGRAM DM
-                        </a>
-                    </div>
+                <div class="cta-buttons">
+                    <a href="#" target="_blank" class="btn-primary" id="igOrderBtn">
+                        FALAR NO INSTAGRAM DM ⚡
+                    </a>
                 </div>
             </div>
         </div>
@@ -129,7 +128,7 @@
     <!-- Methods / Editorial About Section -->
     <section class="methods-about-section" id="about">
         <div class="methods-photo-wrapper">
-            <img src="hero-model.jpg" alt="Editorial Tecateliê" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format&fit=crop&q=80';">
+            <img src="hero-model.jpg" alt="Editorial Tecateliê">
         </div>
         <div class="methods-text-box">
             <h2>UPCYCLING & <span>BRECHÓ</span></h2>
@@ -143,14 +142,13 @@
         <div class="footer-inner">
             <div class="footer-info">
                 <p>INSTAGRAM: @tecatelierr</p>
-                <p>WHATSAPP: (11) 99999-9999</p>
             </div>
             <div class="footer-logo">
-                <img src="logo-pink.png" alt="Tecateliê Logo" onerror="this.onerror=null; this.src='logo-black.png';">
+                <img src="logo-black.png" alt="Tecateliê Logo">
             </div>
         </div>
     </footer>
 
-    <script type="module" src="app.js?v=3"></script>
+    <script src="app.js"></script>
 </body>
 </html>
