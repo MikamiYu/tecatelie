@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Tecateliê | Y2K Upcycling & Streetwear</title>
     <meta name="description" content="Coleção e peças exclusivas Tecateliê Upcycling. Estilo Y2K e streetwear nacional.">
     <!-- Google Fonts -->
@@ -17,14 +17,18 @@
     <nav class="nav-bar">
         <div class="nav-links-left">
             <a href="#catalog" class="nav-link">CATÁLOGO</a>
-            <a href="#about" class="nav-link">SOBRE</a>
         </div>
         <div class="brand-logo-container">
-            <img src="logo-pink.png" alt="Tecateliê" class="brand-logo-main">
+            <img src="logo-black.png" alt="Tecateliê" class="brand-logo-main">
         </div>
         <div class="nav-links-right">
-            <a href="https://instagram.com/tecatelierr" target="_blank" class="nav-link">INSTAGRAM</a>
-            <a href="https://wa.me/5511999999999" target="_blank" class="nav-link">WHATSAPP</a>
+            <a href="https://instagram.com/tecatelierr" target="_blank" class="nav-link nav-icon-link" title="Instagram">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
         </div>
     </nav>
 
@@ -33,24 +37,30 @@
         <img src="hero-model.jpg" alt="Tecateliê Streetwear" class="hero-image">
         <div class="hero-overlay-content">
             <h1 class="hero-giant-title">ÚLTIMO DROP</h1>
-            <div class="hero-subtitle-box">
-                <span class="hero-subtitle-text">NOVA COLEÇÃO • 100% UPCYCLING</span>
-            </div>
         </div>
     </section>
 
     <!-- Editorial Header Title -->
     <div class="editorial-header" id="catalog">
-        <h2 class="editorial-title">PEÇAS <span>DISPONÍVEIS</span></h2>
+        <h2 class="editorial-title"><span>PEÇAS DISPONÍVEIS</span></h2>
     </div>
 
     <!-- Catalog Filter & Ticket Grid -->
     <section class="catalog-section">
-        <div class="brutal-filters">
-            <button class="filter-btn active" data-filter="all">TODAS</button>
-            <button class="filter-btn" data-filter="tops">TOPS</button>
-            <button class="filter-btn" data-filter="bottoms">BOTTOMS</button>
-            <button class="filter-btn" data-filter="accessories">ACESSÓRIOS</button>
+        <div class="filter-dropdown-wrapper">
+            <button class="filter-toggle-btn" id="filterToggle">
+                <span id="filterLabel">FILTRAR POR CATEGORIA</span>
+                <span class="filter-arrow" id="filterArrow">▼</span>
+            </button>
+            <ul class="filter-list" id="filterList">
+                <li class="filter-item active" data-filter="all">TODAS AS PEÇAS</li>
+                <li class="filter-item" data-filter="blusas">BLUSAS</li>
+                <li class="filter-item" data-filter="jaquetas">JAQUETAS</li>
+                <li class="filter-item" data-filter="calcas">CALÇAS</li>
+                <li class="filter-item" data-filter="shorts">SHORTS</li>
+                <li class="filter-item" data-filter="sapatos">SAPATOS</li>
+                <li class="filter-item" data-filter="acessorios">ACESSÓRIOS</li>
+            </ul>
         </div>
 
         <div class="catalog-grid" id="catalogGrid">
@@ -107,11 +117,8 @@
                 </div>
 
                 <div class="cta-buttons">
-                    <a href="#" target="_blank" class="btn-primary" id="waOrderBtn">
-                        GARANTIR PEÇA VIA WHATSAPP ⚡
-                    </a>
-                    <a href="#" target="_blank" class="btn-secondary" id="igOrderBtn">
-                        FALAR NO INSTAGRAM DM
+                    <a href="#" target="_blank" class="btn-primary" id="igOrderBtn">
+                        FALAR NO INSTAGRAM DM ⚡
                     </a>
                 </div>
             </div>
@@ -135,7 +142,6 @@
         <div class="footer-inner">
             <div class="footer-info">
                 <p>INSTAGRAM: @tecatelierr</p>
-                <p>WHATSAPP: (11) 99999-9999</p>
             </div>
             <div class="footer-logo">
                 <img src="logo-black.png" alt="Tecateliê Logo">
@@ -143,6 +149,6 @@
         </div>
     </footer>
 
-    <script type="module" src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

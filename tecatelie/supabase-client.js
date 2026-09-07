@@ -1,7 +1,3 @@
-// =====================================================
-//  Tecateliê — Supabase Client
-//  Shared between index.html and admin.html
-// =====================================================
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
 const SUPABASE_URL  = 'https://lsxfmfijwoourcpwlxjf.supabase.co';
