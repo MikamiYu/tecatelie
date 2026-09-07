@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Tecateliê | Y2K Upcycling & Streetwear</title>
-    <meta name="description" content="Coleção e peças exclusivas Tecateliê Upcycling. Estilo Y2K e streetwear nacional.">
+    <title>Tecateliê | Brechó & Upcycling</title>
+    <meta name="description" content="Tecateliê | Peças exclusivas de Brechó & Upcycling.">
+    <meta property="og:title" content="Tecateliê | Brechó & Upcycling">
+    <meta property="og:description" content="Tecateliê | Peças exclusivas de Brechó & Upcycling.">
+    <meta property="og:type" content="website">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,12 +35,34 @@
         </div>
     </nav>
 
-    <!-- Giant Editorial Hero Banner -->
+    <!-- Giant Editorial Hero Banner Slider -->
     <section class="hero-section">
-        <img src="hero-model.jpg" alt="Tecateliê Streetwear" class="hero-image">
-        <div class="hero-overlay-content">
-            <h1 class="hero-giant-title">ÚLTIMO DROP</h1>
+        <div class="hero-slider">
+            <div class="hero-slide active" id="heroSlide1">
+                <video class="hero-video" autoplay muted loop playsinline preload="auto">
+                    <source src="IMG_3812.MOV" type="video/quicktime">
+                    <source src="IMG_3812.MOV" type="video/mp4">
+                    Seu navegador não suporta vídeo HTML5.
+                </video>
+                <div class="hero-overlay-content">
+                    <h1 class="hero-giant-title">ÚLTIMO &nbsp;&nbsp; DROP</h1>
+                </div>
+            </div>
+            <div class="hero-slide" id="heroSlide2">
+                <img src="hero-model.jpg" alt="Tecateliê Upcycling" class="hero-image">
+                <div class="hero-overlay-content">
+                    <h1 class="hero-giant-title">ÚLTIMAS &nbsp;&nbsp; PEÇAS</h1>
+                </div>
+            </div>
         </div>
+
+        <!-- Slider Controls -->
+        <div class="hero-slider-nav">
+            <button class="hero-slider-dot active" onclick="setHeroSlide(0)" aria-label="Slide 1"></button>
+            <button class="hero-slider-dot" onclick="setHeroSlide(1)" aria-label="Slide 2"></button>
+        </div>
+        <button class="hero-slider-arrow prev" onclick="prevHeroSlide()" aria-label="Slide anterior">‹</button>
+        <button class="hero-slider-arrow next" onclick="nextHeroSlide()" aria-label="Próximo slide">›</button>
     </section>
 
     <!-- Editorial Header Title -->
@@ -68,67 +93,12 @@
         </div>
     </section>
 
-    <!-- Product Showcase Area (Reveals on selection) -->
-    <section class="showcase-section" id="featured" style="display: none;">
-        <div class="showcase-grid">
-            <!-- Visual Left Column -->
-            <div class="showcase-visual">
-                <img src="" alt="Peça Destaque" id="showcaseMainImg" class="showcase-main-img">
-                <div class="showcase-thumbs-bar">
-                    <div class="thumb-item active" onclick="changeShowcaseImage(0)">
-                        <img src="" id="thumbImg1" alt="V1">
-                    </div>
-                    <div class="thumb-item" onclick="changeShowcaseImage(1)">
-                        <img src="" id="thumbImg2" alt="V2">
-                    </div>
-                    <div class="thumb-item" onclick="changeShowcaseImage(2)">
-                        <img src="" id="thumbImg3" alt="V3">
-                    </div>
-                </div>
-            </div>
 
-            <!-- Details Right Column -->
-            <div class="showcase-info">
-                <div>
-                    <span class="ticket-tag" id="showcaseCategory">TOPS</span>
-                    <h2 class="showcase-title" id="showcaseTitle">NOME DA PEÇA</h2>
-                    <div class="showcase-price-tag" id="showcasePrice">R$ 00,00</div>
-
-                    <div class="showcase-specs-list">
-                        <div class="spec-item">
-                            <label>TAMANHO</label>
-                            <span id="showcaseSize">G</span>
-                        </div>
-                        <div class="spec-item">
-                            <label>CONDIÇÃO</label>
-                            <span id="showcaseCondition">10/10</span>
-                        </div>
-                    </div>
-
-                    <div class="showcase-tabs-nav">
-                        <button class="tab-btn active" onclick="switchTab('desc')">DESCRIÇÃO</button>
-                        <button class="tab-btn" onclick="switchTab('comp')">COMPOSIÇÃO</button>
-                        <button class="tab-btn" onclick="switchTab('ship')">COMO COMPRAR</button>
-                    </div>
-
-                    <div class="tab-body" id="tabContent">
-                        Carregando detalhes...
-                    </div>
-                </div>
-
-                <div class="cta-buttons">
-                    <a href="#" target="_blank" class="btn-primary" id="igOrderBtn">
-                        FALAR NO INSTAGRAM DM ⚡
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Methods / Editorial About Section -->
     <section class="methods-about-section" id="about">
         <div class="methods-photo-wrapper">
-            <img src="hero-model.jpg" alt="Editorial Tecateliê">
+            <img src="about-photo.jpg" alt="Editorial Tecateliê">
         </div>
         <div class="methods-text-box">
             <h2>UPCYCLING & <span>BRECHÓ</span></h2>

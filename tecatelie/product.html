@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tecateliê | Peça</title>
+    <meta name="description" content="Detalhes da peça exclusiva Tecateliê Upcycling & Brechó.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Navigation Bar -->
+    <nav class="nav-bar">
+        <div class="nav-links-left">
+            <a href="index.html#catalog" class="nav-link">← VOLTAR</a>
+        </div>
+        <div class="brand-logo-container">
+            <a href="index.html">
+                <img src="logo-black.png" alt="Tecateliê" class="brand-logo-main">
+            </a>
+        </div>
+        <div class="nav-links-right">
+            <a href="https://instagram.com/tecatelierr" target="_blank" class="nav-link nav-icon-link" title="Instagram">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Product Showcase Standalone Section -->
+    <section class="showcase-section" style="display: block; min-height: 80vh; padding-top: 3rem;">
+        <div class="showcase-grid">
+            <!-- Visual Left Column -->
+            <div class="showcase-visual">
+                <img src="" alt="Peça Destaque" id="showcaseMainImg" class="showcase-main-img">
+                <div class="showcase-thumbs-bar" id="thumbsBar">
+                    <div class="thumb-item active" onclick="changeShowcaseImage(0)">
+                        <img src="" id="thumbImg1" alt="V1">
+                    </div>
+                    <div class="thumb-item" onclick="changeShowcaseImage(1)">
+                        <img src="" id="thumbImg2" alt="V2">
+                    </div>
+                    <div class="thumb-item" onclick="changeShowcaseImage(2)">
+                        <img src="" id="thumbImg3" alt="V3">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Details Right Column -->
+            <div class="showcase-info">
+                <div>
+                    <h2 class="showcase-title" id="showcaseTitle" style="font-family: 'Inter', sans-serif;">NOME DA PEÇA</h2>
+                    <div class="showcase-price-tag" id="showcasePrice" style="font-family: 'Inter', sans-serif;">R$ 00,00</div>
+
+                    <div class="showcase-specs-list">
+                        <div class="spec-item">
+                            <label>TAMANHO</label>
+                            <span id="showcaseSize">G</span>
+                        </div>
+                        <div class="spec-item">
+                            <label>CONDIÇÃO</label>
+                            <span id="showcaseCondition">10/10</span>
+                        </div>
+                    </div>
+
+                    <div class="showcase-tabs-nav">
+                        <button class="tab-btn active" onclick="switchTab('desc')">DESCRIÇÃO</button>
+                        <button class="tab-btn" onclick="switchTab('comp')">COMPOSIÇÃO</button>
+                        <button class="tab-btn" onclick="switchTab('pay')">PAGAMENTO</button>
+                        <button class="tab-btn" onclick="switchTab('ship')">COMO COMPRAR</button>
+                    </div>
+
+                    <div class="tab-body" id="tabContent">
+                        Carregando detalhes...
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="https://instagram.com/tecatelierr" target="_blank" class="btn-primary" id="igOrderBtn" style="font-family: 'Inter', sans-serif;">
+                        RESERVAR VIA DM
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-info">
+                <p>INSTAGRAM: @tecatelierr</p>
+            </div>
+            <div class="footer-logo">
+                <img src="logo-black.png" alt="Tecateliê Logo">
+            </div>
+        </div>
+    </footer>
+
+    <script src="product.js"></script>
+</body>
+</html>

@@ -21,6 +21,35 @@ const fallbackProducts = [
         ],
         description: "Jaqueta vintage reconstruída à mão com patches exclusivos e detalhes únicos. Peça única — não existe outra igual.",
         composition: "100% Poliéster reciclado de garimpo vintage. Patches costurados individualmente."
+    },
+    {
+        id: 2,
+        title: "CALÇA CARGO CUSTOM",
+        category: "calcas",
+        price: "R$ 220,00",
+        size: "M",
+        condition: "09/10 (CUSTOM)",
+        image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&auto=format&fit=crop&q=80",
+        images: [
+            "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&auto=format&fit=crop&q=80"
+        ],
+        description: "Calça cargo retrabalhada com bolsos utilitários e ajuste nas barras.",
+        composition: "100% Jeans garimpado."
+    },
+    {
+        id: 3,
+        title: "BLUSA CROPPED MATRIX",
+        category: "blusas",
+        price: "R$ 130,00",
+        size: "P",
+        condition: "10/10 (UPCYCLED)",
+        status: "sold",
+        image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=80",
+        images: [
+            "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=80"
+        ],
+        description: "Blusa cropped exclusiva com acabamento impecável.",
+        composition: "Algodão com elastano."
     }
 ];
 
@@ -84,29 +113,27 @@ function renderCatalog(filter) {
     }
 
     filtered.forEach(product => {
+        const isSold = (product.status === 'sold' || product.status === 'vendido' || product.sold === true);
         const card = document.createElement('div');
-        card.className = 'ticket-card';
+        card.className = `ticket-card ${isSold ? 'sold' : ''}`;
         const imgUrl = product.image || (product.images && product.images[0]) || '';
 
         card.innerHTML = `
             <div class="ticket-img-wrapper">
+                ${isSold ? '<span class="sold-badge">VENDIDO</span>' : ''}
                 <img src="${imgUrl}" alt="${product.title}" loading="lazy">
             </div>
             <div class="ticket-content">
-                <span class="ticket-tag">${product.category.toUpperCase()}</span>
                 <h3 class="ticket-title">${product.title}</h3>
                 <div class="ticket-footer">
                     <span class="ticket-price">${product.price}</span>
                     <span class="ticket-size">TAM: ${product.size}</span>
-                    <span class="ticket-buy-badge">VER</span>
                 </div>
             </div>
         `;
 
         card.addEventListener('click', () => {
-            loadShowcase(product);
-            showcaseSection.style.display = 'block';
-            showcaseSection.scrollIntoView({ behavior: 'smooth' });
+            window.location.href = `product.html?id=${product.id}`;
         });
 
         catalogGrid.appendChild(card);
@@ -202,3 +229,54 @@ filterItems.forEach(function(item) {
 
 // ── Iniciar ──────────────────────────────────────────────────────
 fetchProducts();
+
+// ── Hero Slider Controls ─────────────────────────────────────────
+let currentHeroSlide = 0;
+const heroSlides = document.querySelectorAll('.hero-slide');
+const heroDots   = document.querySelectorAll('.hero-slider-dot');
+let heroSlideTimer = null;
+
+window.setHeroSlide = function(index) {
+    if (!heroSlides.length) return;
+    currentHeroSlide = index;
+    if (currentHeroSlide < 0) currentHeroSlide = heroSlides.length - 1;
+    if (currentHeroSlide >= heroSlides.length) currentHeroSlide = 0;
+
+    heroSlides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentHeroSlide);
+        const video = slide.querySelector('video');
+        if (video) {
+            if (i === currentHeroSlide) {
+                video.play().catch(() => {});
+            } else {
+                video.pause();
+            }
+        }
+    });
+
+    heroDots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentHeroSlide);
+    });
+
+    resetHeroAutoSlide();
+};
+
+window.prevHeroSlide = function() {
+    setHeroSlide(currentHeroSlide - 1);
+};
+
+window.nextHeroSlide = function() {
+    setHeroSlide(currentHeroSlide + 1);
+};
+
+function resetHeroAutoSlide() {
+    if (heroSlideTimer) clearInterval(heroSlideTimer);
+    heroSlideTimer = setInterval(() => {
+        setHeroSlide(currentHeroSlide + 1);
+    }, 6000);
+}
+
+if (heroSlides.length > 1) {
+    resetHeroAutoSlide();
+}
+
