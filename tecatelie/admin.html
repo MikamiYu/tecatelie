@@ -284,6 +284,116 @@
             border-color: var(--pink);
         }
 
+        /* ── PRICE INPUT WITH R$ PREFIX ──────────── */
+        .price-input-wrapper {
+            display: flex;
+            align-items: center;
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: border-color .2s;
+        }
+
+        .price-input-wrapper:focus-within {
+            border-color: var(--pink);
+        }
+
+        .price-prefix {
+            padding: .6rem .7rem;
+            background: rgba(255, 0, 122, 0.1);
+            color: var(--pink);
+            font-weight: 700;
+            font-size: 0.85rem;
+            border-right: 1px solid var(--border);
+            user-select: none;
+        }
+
+        .price-input-wrapper input {
+            border: none !important;
+            border-radius: 0 !important;
+            width: 100%;
+        }
+
+        /* ── DROPZONE & IMAGE UPLOADER ───────────── */
+        .dropzone-container {
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1rem;
+            text-align: center;
+            background: var(--dark);
+            cursor: pointer;
+            transition: border-color .2s, background-color .2s;
+        }
+
+        .dropzone-container:hover, .dropzone-container.dragover {
+            border-color: var(--pink);
+            background: rgba(255, 0, 122, 0.05);
+        }
+
+        .dropzone-icon {
+            font-size: 1.6rem;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .dropzone-text {
+            font-size: 0.8rem;
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .dropzone-subtext {
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin-top: 0.2rem;
+        }
+
+        .img-preview-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 0.85rem;
+        }
+
+        .img-preview-card {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--card);
+        }
+
+        .img-preview-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .img-preview-remove {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: rgba(239, 68, 68, 0.85);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s;
+        }
+
+        .img-preview-remove:hover {
+            background: var(--red);
+        }
+
         .form-actions {
             display: flex;
             justify-content: flex-end;
@@ -433,13 +543,17 @@
                         <option value="blusas">Blusas</option>
                         <option value="jaquetas">Jaquetas</option>
                         <option value="calcas">Calças</option>
+                        <option value="shorts">Shorts</option>
                         <option value="sapatos">Sapatos</option>
                         <option value="acessorios">Acessórios</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Preço *</label>
-                    <input type="text" id="fPrice" placeholder="Ex: R$ 180,00">
+                    <div class="price-input-wrapper">
+                        <span class="price-prefix">R$</span>
+                        <input type="text" id="fPrice" placeholder="180,00">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Tamanho *</label>
@@ -450,6 +564,10 @@
                     <input type="text" id="fCondition" placeholder="Ex: 10/10 (UPCYCLED)">
                 </div>
                 <div class="form-group">
+                    <label>Composição</label>
+                    <input type="text" id="fComposition" placeholder="Ex: 100% Algodão garimpado">
+                </div>
+                <div class="form-group">
                     <label>Status</label>
                     <select id="fStatus">
                         <option value="available">Disponível</option>
@@ -457,12 +575,24 @@
                     </select>
                 </div>
                 <div class="form-group full-width">
-                    <label>URLs das Fotos (uma por linha, máx. 3) *</label>
-                    <textarea id="fImages" rows="3" placeholder="Cole aqui os links das fotos (uma por linha)"></textarea>
+                    <label>Fotos da Peça (Máx. 3 fotos) *</label>
+                    <div class="dropzone-container" id="dropzone">
+                        <span class="dropzone-icon">📷</span>
+                        <div class="dropzone-text">Arraste as fotos aqui ou clique para selecionar do computador</div>
+                        <div class="dropzone-subtext">Formatos aceitos: JPG, PNG, WEBP</div>
+                        <input type="file" id="fFileInput" multiple accept="image/*" style="display:none;">
+                    </div>
+                    <div class="img-preview-grid" id="imgPreviewGrid"></div>
+                </div>
+                <div class="form-group full-width">
+                    <label style="cursor:pointer; display:inline-block;" onclick="toggleUrlTextarea()">
+                        <span style="font-size:0.75rem; color:var(--muted); text-decoration:underline;">🔗 Ou cole links (URLs) das fotos ▼</span>
+                    </label>
+                    <textarea id="fImages" rows="2" placeholder="Cole aqui os links das fotos (uma por linha)" style="display:none; margin-top:0.3rem;"></textarea>
                 </div>
                 <div class="form-group full-width">
                     <label>Descrição</label>
-                    <textarea id="fDescription" rows="2" placeholder="Descrição da peça..."></textarea>
+                    <textarea id="fDescription" rows="2" placeholder="Descrição detalhada da peça..."></textarea>
                 </div>
             </div>
             <div class="form-actions">
@@ -508,6 +638,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 let editingId = null;
 let allProducts = [];
+let uploadedImages = [];
 
 window.doLogin = doLogin;
 window.doLogout = doLogout;
@@ -516,6 +647,133 @@ window.clearForm = clearForm;
 window.editProduct = editProduct;
 window.deleteProduct = deleteProduct;
 window.loadProducts = loadProducts;
+window.toggleUrlTextarea = toggleUrlTextarea;
+window.removeImage = removeImage;
+
+// ── Dropzone & Upload de Imagens ────────────────────────────────
+const dropzone = document.getElementById('dropzone');
+const fFileInput = document.getElementById('fFileInput');
+
+if (dropzone && fFileInput) {
+    dropzone.addEventListener('click', () => fFileInput.click());
+
+    dropzone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropzone.classList.add('dragover');
+    });
+
+    dropzone.addEventListener('dragleave', () => {
+        dropzone.classList.remove('dragover');
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('dragover');
+        if (e.dataTransfer.files.length) {
+            handleFiles(e.dataTransfer.files);
+        }
+    });
+
+    fFileInput.addEventListener('change', (e) => {
+        if (e.target.files.length) {
+            handleFiles(e.target.files);
+        }
+    });
+}
+
+async function handleFiles(files) {
+    for (let file of files) {
+        if (uploadedImages.length >= 3) {
+            showToast('Máximo de 3 fotos por peça.', 'error');
+            break;
+        }
+        if (!file.type.startsWith('image/')) continue;
+
+        showToast('Processando foto...', 'success');
+
+        // Tentativa de Upload no Supabase Storage
+        try {
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${fileExt}`;
+
+            const { data, error } = await supabase.storage.from('products').upload(fileName, file);
+
+            if (!error && data) {
+                const { data: publicUrlData } = supabase.storage.from('products').getPublicUrl(fileName);
+                if (publicUrlData && publicUrlData.publicUrl) {
+                    uploadedImages.push(publicUrlData.publicUrl);
+                    renderImagePreviews();
+                    continue;
+                }
+            }
+        } catch (e) {
+            // Ignora erro do storage e cai no fallback Base64 otimizado
+        }
+
+        // Fallback: Converte para Base64 otimizado (garante que a foto funcione imediatamente!)
+        const base64 = await convertFileToBase64(file);
+        uploadedImages.push(base64);
+        renderImagePreviews();
+    }
+}
+
+function convertFileToBase64(file) {
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                let width = img.width;
+                let height = img.height;
+                const maxDim = 1000;
+                if (width > maxDim || height > maxDim) {
+                    if (width > height) {
+                        height = Math.round((height * maxDim) / width);
+                        width = maxDim;
+                    } else {
+                        width = Math.round((width * maxDim) / height);
+                        height = maxDim;
+                    }
+                }
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                resolve(canvas.toDataURL('image/jpeg', 0.85));
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function renderImagePreviews() {
+    const grid = document.getElementById('imgPreviewGrid');
+    if (grid) {
+        grid.innerHTML = uploadedImages.map((url, index) => `
+            <div class="img-preview-card">
+                <img src="${url}" alt="Preview ${index + 1}">
+                <button type="button" class="img-preview-remove" onclick="removeImage(${index})">✕</button>
+            </div>
+        `).join('');
+    }
+
+    const fImages = document.getElementById('fImages');
+    if (fImages) fImages.value = uploadedImages.join('\n');
+}
+
+function removeImage(index) {
+    uploadedImages.splice(index, 1);
+    renderImagePreviews();
+}
+
+function toggleUrlTextarea() {
+    const textarea = document.getElementById('fImages');
+    if (textarea) {
+        textarea.style.display = textarea.style.display === 'none' ? 'block' : 'none';
+    }
+}
 
 function showToast(msg, type = 'success') {
     const el = document.getElementById('toast');
@@ -613,20 +871,48 @@ function renderTable() {
 async function saveProduct() {
     const title = document.getElementById('fTitle').value.trim();
     const category = document.getElementById('fCategory').value;
-    const price = document.getElementById('fPrice').value.trim();
+    let priceRaw = document.getElementById('fPrice').value.trim();
     const size = document.getElementById('fSize').value.trim();
     const condition = document.getElementById('fCondition').value.trim();
+    const composition = document.getElementById('fComposition').value.trim();
     const status = document.getElementById('fStatus').value;
     const description = document.getElementById('fDescription').value.trim();
-    const imagesRaw = document.getElementById('fImages').value.trim();
-    const images = imagesRaw.split('\n').map(s => s.trim()).filter(Boolean);
 
-    if (!title || !category || !price || !size) {
+    // Ler URLs das imagens (dos uploads ou da textarea)
+    const imagesTextarea = document.getElementById('fImages').value.trim();
+    let images = imagesTextarea ? imagesTextarea.split('\n').map(s => s.trim()).filter(Boolean) : [];
+    if (!images.length && uploadedImages.length) {
+        images = uploadedImages;
+    }
+
+    if (!title || !category || !priceRaw || !size) {
         showToast('Preencha os campos obrigatórios (*).', 'error');
         return;
     }
 
-    const payload = { title, category, price, size, condition, status, description, images, image: images[0] || '' };
+    if (!images.length) {
+        showToast('Adicione pelo menos uma foto para a peça.', 'error');
+        return;
+    }
+
+    // Formatar preço com R$ fixo
+    let price = priceRaw;
+    if (!price.startsWith('R$')) {
+        price = `R$ ${price}`;
+    }
+
+    const payload = {
+        title,
+        category,
+        price,
+        size,
+        condition,
+        composition,
+        status,
+        description,
+        images,
+        image: images[0] || ''
+    };
 
     let error;
     if (editingId) {
@@ -652,22 +938,34 @@ function editProduct(id) {
     document.getElementById('formTitle').textContent = '✏️ EDITAR PEÇA';
     document.getElementById('fTitle').value = p.title || '';
     document.getElementById('fCategory').value = p.category || '';
-    document.getElementById('fPrice').value = p.price || '';
+
+    // Limpar o prefixo R$ para exibição limpa no campo de entrada
+    let rawPrice = p.price || '';
+    rawPrice = rawPrice.replace(/^R\$\s*/, '');
+    document.getElementById('fPrice').value = rawPrice;
+
     document.getElementById('fSize').value = p.size || '';
     document.getElementById('fCondition').value = p.condition || '';
+    document.getElementById('fComposition').value = p.composition || '';
     document.getElementById('fStatus').value = p.status || 'available';
     document.getElementById('fDescription').value = p.description || '';
-    document.getElementById('fImages').value = (p.images || []).join('\n');
+
+    uploadedImages = p.images || (p.image ? [p.image] : []);
+    renderImagePreviews();
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function clearForm() {
     editingId = null;
+    uploadedImages = [];
     document.getElementById('formTitle').textContent = '➕ NOVA PEÇA';
-    ['fTitle','fCategory','fPrice','fSize','fCondition','fDescription','fImages'].forEach(id => {
-        document.getElementById(id).value = '';
+    ['fTitle','fCategory','fPrice','fSize','fCondition','fComposition','fDescription','fImages'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
     });
     document.getElementById('fStatus').value = 'available';
+    renderImagePreviews();
 }
 
 async function deleteProduct(id) {
