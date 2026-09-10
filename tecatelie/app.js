@@ -4,54 +4,8 @@
 
 const INSTAGRAM_USERNAME = 'tecatelierr';
 
-// ── Placeholder ──────────────────────────────────────────────────
-const fallbackProducts = [
-    {
-        id: 1,
-        title: "JAQUETA VINTAGE UPCYCLED",
-        category: "jaquetas",
-        price: "R$ 189,00",
-        size: "G",
-        condition: "10/10 (UPCYCLED)",
-        image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&auto=format&fit=crop&q=80",
-        images: [
-            "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&auto=format&fit=crop&q=80",
-            "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&auto=format&fit=crop&q=80"
-        ],
-        description: "Jaqueta vintage reconstruída à mão com patches exclusivos e detalhes únicos. Peça única — não existe outra igual.",
-        composition: "100% Poliéster reciclado de garimpo vintage. Patches costurados individualmente."
-    },
-    {
-        id: 2,
-        title: "CALÇA CARGO CUSTOM",
-        category: "calcas",
-        price: "R$ 220,00",
-        size: "M",
-        condition: "09/10 (CUSTOM)",
-        image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&auto=format&fit=crop&q=80",
-        images: [
-            "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&auto=format&fit=crop&q=80"
-        ],
-        description: "Calça cargo retrabalhada com bolsos utilitários e ajuste nas barras.",
-        composition: "100% Jeans garimpado."
-    },
-    {
-        id: 3,
-        title: "BLUSA CROPPED MATRIX",
-        category: "blusas",
-        price: "R$ 130,00",
-        size: "P",
-        condition: "10/10 (UPCYCLED)",
-        status: "sold",
-        image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=80",
-        images: [
-            "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=80"
-        ],
-        description: "Blusa cropped exclusiva com acabamento impecável.",
-        composition: "Algodão com elastano."
-    }
-];
+// ── Placeholder (Vazio) ──────────────────────────────────────────
+const fallbackProducts = [];
 
 // ── Estado ───────────────────────────────────────────────────────
 let currentProduct = null;
