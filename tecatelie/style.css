@@ -682,6 +682,41 @@ body {
     color: var(--acid-green);
 }
 
+.ticket-price.promo {
+    color: var(--hot-pink);
+    font-weight: 800;
+}
+
+.ticket-old-price {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-decoration: line-through;
+    margin-right: 0.35rem;
+    font-weight: 500;
+}
+
+.showcase-old-price {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    text-decoration: line-through;
+    margin-right: 0.4rem;
+    font-weight: 500;
+}
+
+.pix-discount-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    background: rgba(204, 255, 0, 0.15);
+    color: var(--acid-green);
+    border: 1px solid var(--acid-green);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
 .ticket-card.sold {
     filter: grayscale(100%);
     opacity: 0.65;
@@ -698,6 +733,27 @@ body {
     background-color: rgba(10, 10, 12, 0.9);
     color: var(--hot-pink);
     border: 1px solid var(--hot-pink);
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 0.2rem 0.6rem;
+    z-index: 10;
+}
+
+.discount-badge {
+    position: absolute;
+    top: 0.6rem;
+    left: 0.6rem;
+    background-color: var(--hot-pink);
+    color: #ffffff;
+    font-family: var(--font-impact);
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 0.25rem 0.6rem;
+    letter-spacing: 1px;
+    z-index: 10;
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
     font-family: 'Clash Display', 'Inter', sans-serif;
     font-size: 0.65rem;
     font-weight: 600;
@@ -1106,40 +1162,143 @@ footer {
     }
 
     .showcase-section {
-        padding: 2rem 1rem;
+        padding: 1.5rem 1rem;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
     }
 
     .showcase-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .showcase-visual {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
     }
 
     .showcase-main-img {
-        height: 350px;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: 420px;
+        object-fit: cover;
+        border-radius: 6px;
+        box-sizing: border-box;
     }
 
     .showcase-thumbs-bar {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
         gap: 0.5rem;
+        margin-top: 0.5rem;
     }
 
     .thumb-item {
-        width: 65px;
-        height: 65px;
+        width: 60px;
+        height: 60px;
+        border-radius: 4px;
+    }
+
+    .showcase-info {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        box-sizing: border-box;
+        padding: 0;
+    }
+
+    .showcase-info > div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .showcase-title {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
+        text-align: center;
+        width: 100%;
         margin-top: 0.3rem;
     }
 
     .showcase-price-tag {
         font-size: 1.4rem;
         margin: 0.8rem 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        text-align: center;
     }
 
     .showcase-specs-list {
-        gap: 1rem;
-        padding: 0.8rem;
+        width: 100%;
+        justify-content: center;
+        gap: 1.5rem;
+        padding: 0.8rem 1rem;
+        box-sizing: border-box;
+        margin-bottom: 1.2rem;
+        border-radius: 6px;
+    }
+
+    .spec-item {
+        text-align: center;
+    }
+
+    .showcase-tabs-nav {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.4rem 0.8rem;
+        border-bottom: 1px solid var(--border-dark);
+        padding-bottom: 0.4rem;
+        margin-bottom: 1rem;
+        box-sizing: border-box;
+    }
+
+    .tab-btn {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.5rem;
+    }
+
+    .tab-body {
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 0.5rem;
+        word-break: break-word;
+        min-height: 60px;
+    }
+
+    .cta-buttons {
+        width: 100%;
+        margin-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        box-sizing: border-box;
+    }
+
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        border-radius: 6px;
     }
 
     .methods-about-section {

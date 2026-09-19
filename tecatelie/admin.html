@@ -549,10 +549,17 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Preço *</label>
+                    <label>Preço Atual (Por) *</label>
                     <div class="price-input-wrapper">
                         <span class="price-prefix">R$</span>
                         <input type="text" id="fPrice" placeholder="180,00">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Preço Original (De) — Desconto</label>
+                    <div class="price-input-wrapper">
+                        <span class="price-prefix">R$</span>
+                        <input type="text" id="fOriginalPrice" placeholder="Ex: 220,00 (Vazio se não houver)">
                     </div>
                 </div>
                 <div class="form-group">
@@ -872,6 +879,7 @@ async function saveProduct() {
     const title = document.getElementById('fTitle').value.trim();
     const category = document.getElementById('fCategory').value;
     let priceRaw = document.getElementById('fPrice').value.trim();
+    let originalPriceRaw = document.getElementById('fOriginalPrice').value.trim();
     const size = document.getElementById('fSize').value.trim();
     const condition = document.getElementById('fCondition').value.trim();
     const composition = document.getElementById('fComposition').value.trim();
@@ -901,10 +909,16 @@ async function saveProduct() {
         price = `R$ ${price}`;
     }
 
+    let original_price = '';
+    if (originalPriceRaw) {
+        original_price = originalPriceRaw.startsWith('R$') ? originalPriceRaw : `R$ ${originalPriceRaw}`;
+    }
+
     const payload = {
         title,
         category,
         price,
+        original_price,
         size,
         condition,
         composition,
@@ -939,10 +953,14 @@ function editProduct(id) {
     document.getElementById('fTitle').value = p.title || '';
     document.getElementById('fCategory').value = p.category || '';
 
-    // Limpar o prefixo R$ para exibição limpa no campo de entrada
+    // Limpar o prefixo R$ para exibição limpa nos campos de preço
     let rawPrice = p.price || '';
     rawPrice = rawPrice.replace(/^R\$\s*/, '');
     document.getElementById('fPrice').value = rawPrice;
+
+    let rawOrigPrice = p.original_price || '';
+    rawOrigPrice = rawOrigPrice.replace(/^R\$\s*/, '');
+    document.getElementById('fOriginalPrice').value = rawOrigPrice;
 
     document.getElementById('fSize').value = p.size || '';
     document.getElementById('fCondition').value = p.condition || '';
@@ -960,7 +978,7 @@ function clearForm() {
     editingId = null;
     uploadedImages = [];
     document.getElementById('formTitle').textContent = '➕ NOVA PEÇA';
-    ['fTitle','fCategory','fPrice','fSize','fCondition','fComposition','fDescription','fImages'].forEach(id => {
+    ['fTitle','fCategory','fPrice','fOriginalPrice','fSize','fCondition','fComposition','fDescription','fImages'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.value = '';
     });

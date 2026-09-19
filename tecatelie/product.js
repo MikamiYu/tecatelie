@@ -71,8 +71,15 @@ function renderProductInfo(product) {
         }
     }
 
-    showcaseTitle.innerText     = product.title;
-    showcasePrice.innerText     = product.price;
+    showcaseTitle.innerText = product.title;
+    
+    const hasDiscount = product.original_price && product.original_price.trim() !== '' && product.original_price !== product.price;
+    if (hasDiscount) {
+        showcasePrice.innerHTML = `<span class="showcase-old-price">${product.original_price}</span> ${product.price} <span class="pix-discount-tag">5% OFF NO PIX</span>`;
+    } else {
+        showcasePrice.innerHTML = `${product.price} <span class="pix-discount-tag">5% OFF NO PIX</span>`;
+    }
+
     showcaseSize.innerText      = product.size;
     showcaseCondition.innerText = product.condition || '10/10';
 
@@ -122,7 +129,7 @@ function updateTabContent() {
     } else if (currentTab === 'comp') {
         tabContent.innerHTML = currentProduct.composition || 'Sem informação de composição.';
     } else if (currentTab === 'pay') {
-        tabContent.innerHTML = 'Aceitamos pagamentos via <strong>Crédito</strong> e <strong>Débito</strong> (Mercado Pago) e <strong>Pix</strong> à vista.';
+        tabContent.innerHTML = 'Aceitamos pagamentos via <strong>Crédito</strong> e <strong>Débito</strong> (Mercado Pago) e <strong>Pix</strong> à vista (com <strong>5% de DESCONTO EXCLUSIVO</strong> no Pix!).';
     } else {
         tabContent.innerHTML = 'Clique no botão <strong>RESERVAR VIA DM</strong> abaixo para falar diretamente com a gente no Instagram!';
     }

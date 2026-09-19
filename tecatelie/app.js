@@ -119,19 +119,35 @@ function renderCatalog(filter) {
 
     filtered.forEach(product => {
         const isSold = (product.status === 'sold' || product.status === 'vendido' || product.sold === true);
+        const hasDiscount = product.original_price && product.original_price.trim() !== '' && product.original_price !== product.price;
+
         const card = document.createElement('div');
         card.className = `ticket-card ${isSold ? 'sold' : ''}`;
         const imgUrl = product.image || (product.images && product.images[0]) || '';
 
+        let badgeHtml = '';
+        if (isSold) {
+            badgeHtml = '<span class="sold-badge">VENDIDO</span>';
+        } else if (hasDiscount) {
+            badgeHtml = '<span class="discount-badge">PROMO</span>';
+        }
+
+        let priceHtml = '';
+        if (hasDiscount) {
+            priceHtml = `<span class="ticket-old-price">${product.original_price}</span> <span class="ticket-price promo">${product.price}</span>`;
+        } else {
+            priceHtml = `<span class="ticket-price">${product.price}</span>`;
+        }
+
         card.innerHTML = `
             <div class="ticket-img-wrapper">
-                ${isSold ? '<span class="sold-badge">VENDIDO</span>' : ''}
+                ${badgeHtml}
                 <img src="${imgUrl}" alt="${product.title}" loading="lazy">
             </div>
             <div class="ticket-content">
                 <h3 class="ticket-title">${product.title}</h3>
                 <div class="ticket-footer">
-                    <span class="ticket-price">${product.price}</span>
+                    <div>${priceHtml}</div>
                     <span class="ticket-size">TAM: ${product.size}</span>
                 </div>
             </div>
