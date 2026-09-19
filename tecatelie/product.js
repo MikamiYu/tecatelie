@@ -18,9 +18,6 @@ const showcaseSize      = document.getElementById('showcaseSize');
 const showcaseCondition = document.getElementById('showcaseCondition');
 const tabContent        = document.getElementById('tabContent');
 const igOrderBtn        = document.getElementById('igOrderBtn');
-const thumbImg1         = document.getElementById('thumbImg1');
-const thumbImg2         = document.getElementById('thumbImg2');
-const thumbImg3         = document.getElementById('thumbImg3');
 
 async function loadProductDetail() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -53,12 +50,27 @@ async function loadProductDetail() {
 function renderProductInfo(product) {
     if (!product) return;
     document.title = `Tecateliê | ${product.title}`;
-    const imgs = (product.images && product.images.length > 0) ? product.images : [product.image];
+    const imgs = (product.images && product.images.length > 0) 
+        ? product.images.filter(Boolean) 
+        : (product.image ? [product.image] : []);
 
-    showcaseMainImg.src         = imgs[0] || product.image;
-    thumbImg1.src               = imgs[0] || product.image;
-    thumbImg2.src               = imgs[1] || imgs[0] || product.image;
-    thumbImg3.src               = imgs[2] || imgs[0] || product.image;
+    if (showcaseMainImg) showcaseMainImg.src = imgs[0] || '';
+
+    // Renderizar miniaturas dinamicamente (somente a quantidade real de fotos)
+    const thumbsBar = document.getElementById('thumbsBar');
+    if (thumbsBar) {
+        if (imgs.length <= 1) {
+            thumbsBar.style.display = 'none';
+        } else {
+            thumbsBar.style.display = 'flex';
+            thumbsBar.innerHTML = imgs.map((imgUrl, i) => `
+                <div class="thumb-item ${i === 0 ? 'active' : ''}" onclick="changeShowcaseImage(${i})">
+                    <img src="${imgUrl}" alt="Miniatura ${i + 1}">
+                </div>
+            `).join('');
+        }
+    }
+
     showcaseTitle.innerText     = product.title;
     showcasePrice.innerText     = product.price;
     showcaseSize.innerText      = product.size;

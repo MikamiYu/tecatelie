@@ -33,8 +33,23 @@
                 </div>
                 <div class="drawer-submenu" id="drawerSubmenu">
                     <a href="#catalog" class="drawer-sublink" onclick="selectDrawerCategory('all')">TODAS AS PEÇAS</a>
-                    <a href="#catalog" class="drawer-sublink" onclick="selectDrawerCategory('superior')">SUPERIOR</a>
-                    <a href="#catalog" class="drawer-sublink" onclick="selectDrawerCategory('inferior')">INFERIOR</a>
+                    
+                    <div class="drawer-nested">
+                        <div class="drawer-sublink drawer-parent" onclick="selectDrawerCategory('superior')">SUPERIOR</div>
+                        <div class="drawer-nested-list">
+                            <a href="#catalog" class="drawer-nested-item" onclick="selectDrawerCategory('jaquetas')">JAQUETAS</a>
+                            <a href="#catalog" class="drawer-nested-item" onclick="selectDrawerCategory('blusas')">BLUSAS</a>
+                        </div>
+                    </div>
+
+                    <div class="drawer-nested">
+                        <div class="drawer-sublink drawer-parent" onclick="selectDrawerCategory('inferior')">INFERIOR</div>
+                        <div class="drawer-nested-list">
+                            <a href="#catalog" class="drawer-nested-item" onclick="selectDrawerCategory('calcas')">CALÇAS</a>
+                            <a href="#catalog" class="drawer-nested-item" onclick="selectDrawerCategory('shorts')">SHORTS</a>
+                        </div>
+                    </div>
+
                     <a href="#catalog" class="drawer-sublink" onclick="selectDrawerCategory('acessorios')">ACESSÓRIOS</a>
                 </div>
             </div>
@@ -115,8 +130,12 @@
             </button>
             <ul class="filter-list" id="filterList">
                 <li class="filter-item active" data-filter="all">TODAS AS PEÇAS</li>
-                <li class="filter-item" data-filter="superior">SUPERIOR</li>
-                <li class="filter-item" data-filter="inferior">INFERIOR</li>
+                <li class="filter-item" data-filter="superior">SUPERIOR (TODAS)</li>
+                <li class="filter-item filter-subitem" data-filter="jaquetas">— JAQUETAS</li>
+                <li class="filter-item filter-subitem" data-filter="blusas">— BLUSAS</li>
+                <li class="filter-item" data-filter="inferior">INFERIOR (TODAS)</li>
+                <li class="filter-item filter-subitem" data-filter="calcas">— CALÇAS</li>
+                <li class="filter-item filter-subitem" data-filter="shorts">— SHORTS</li>
                 <li class="filter-item" data-filter="acessorios">ACESSÓRIOS</li>
             </ul>
         </div>
@@ -152,6 +171,6 @@
         </div>
     </footer>
 
-    <script src="app.js"></script>
+    <script src="app.js?v=2"></script>
 </body>
 </html>

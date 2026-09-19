@@ -33,7 +33,7 @@ async function fetchProducts() {
         const SUPABASE_URL = 'https://lsxfmfijwoourcpwlxjf.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_nWn-gcZ5igGwPkTyjeus-Q_qpNz7-nF';
 
-        const resp = await fetch(`${SUPABASE_URL}/rest/v1/products?status=eq.available&order=created_at.desc`, {
+        const resp = await fetch(`${SUPABASE_URL}/rest/v1/products?order=created_at.desc`, {
             headers: {
                 'apikey': SUPABASE_KEY,
                 'Authorization': `Bearer ${SUPABASE_KEY}`
